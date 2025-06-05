@@ -5,6 +5,9 @@ import { errorMiddleware } from './src/middlewares/error.js'
 
 // routes imported
 import userRoutes from './src/routes/userRoutes.js'
+import groupRoutes from './src/routes/groupRoutes.js'
+import expenseRoutes from './src/routes/expenseRoutes.js'
+import settlementRoutes from './src/routes/settlementRutes.js'
 
 config({
     path: ".env"
@@ -20,12 +23,14 @@ app.get('/', (req, res)=>{
 })
 
 // using routes
-// app.use("/api/v1", bookRoutes)
 app.use('/api/auth', userRoutes);
+app.use('/api/group', groupRoutes)
+app.use('/api/groups', expenseRoutes)
+
+app.use('/api/groups', settlementRoutes); // for POST /:groupId/settlements
+app.use('/api/users', settlementRoutes);  // for GET /user/:userId/settlements
 app.use(errorMiddleware)
 
 export default app
-// app.listen(PORT, ()=>{
-//     console.log(`App is running on http://localhost:${PORT}`)
-// })
+
 
